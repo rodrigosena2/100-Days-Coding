@@ -1,20 +1,34 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import pokemonInstance from './helper/axios-instance'
+import { useState, useEffect } from 'react'
 import './App.css'
+import useAxios from './hook/use-axios'
 
 function App() {
-  const [pokemonList, setPokemonList] = useState([])
+  const [pokemonList, loading, error] = useAxios({
+    axiosInstance: pokemonInstance, 
+    method: 'GET',
+    url: 'pokemon',
+  })
 
-  axios.get('https://pokeapi.co/api/v2/pokemon')
-    .then((res) => {
-      console.log(res)
-      setPokemonList(res.data)
-    })
-    .catch((err) => console.log(err))
+  console.log(pokemonList, loading, error)
+
+
+  if (loading) {
+    return <div>Loading</div>
+  }
+
+  if (error) {
+    return <div>{error}</div>
+  }
 
   return (
     <div className="App">
-      Front Beginners
+      Front Beginners 
+      <div>
+        {pokemonList?.results?.map((pokemon) => (
+      <div>{pokemon.name}</div>
+        ))}
+      </div>
     </div>
   )
 }
