@@ -42,3 +42,9 @@
   background-color: #777;
   transition: 0.5s;
 }
+
+.pages {
+  text-align: center;
+  padding-top: 2rem;
+  font-size: 2rem;
+}
