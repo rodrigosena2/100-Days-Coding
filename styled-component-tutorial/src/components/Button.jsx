@@ -1,7 +1,3 @@
-import React from 'react'
-
-export default function Button({children}) {
-  return (
-    <button>{children}</button>
-  )
+export default function ButtonStyled({ className,children}) {
+  return <button className={className}>{children}</button>
 }
