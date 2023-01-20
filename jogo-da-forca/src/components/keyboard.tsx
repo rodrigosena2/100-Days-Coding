@@ -57,12 +57,32 @@ const Button = styled.button<{isActive: boolean}>`
 
 `
 
-export default function Keyboard() {
+interface KeyboardProps {
+  disabled?: boolean
+  activeLetters: string[]
+  inactiveLetters: string[]
+  addGuessedLetters: (letter: string) => void
+}
+
+export default function Keyboard({disabled = false,activeLetters,inactiveLetters,addGuessedLetters}: KeyboardProps) {
   return (
     <Wrapper>
-      {Keys.map((letter) => (
-        <Button isActive={true} key={letter}>{letter.toUpperCase()}</Button>
-      ))}
+      {Keys.map((letter) => {
+        const isActive = !activeLetters.includes(letter)
+        const isInactive = !inactiveLetters.includes(letter)
+        
+        return ( 
+         <Button 
+         onClick={() => addGuessedLetters(letter)} 
+         isActive={isActive && isInactive} 
+         key={letter}
+         disabled={!(isActive && isInactive) || disabled}
+         >
+          {letter.toUpperCase()}
+         </Button>  
+        )
+      }
+      )}
     </Wrapper>
   )
 }
