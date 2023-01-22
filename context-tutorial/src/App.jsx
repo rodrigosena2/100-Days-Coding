@@ -1,25 +1,23 @@
-import { useState } from 'react'
+import AppProvider from './context/AppProvider'
+import ChildrenOne from './components/ChildrenOne'
+import ChildrenTwo from './components/ChildrenTwo'
 import './App.css'
 
+const AppContext = createContext(null)
+
 function App() {
-  const [name, setName] = useState('Front Beginners')
+  
 
   return (
-    <>
-      <div className='App'>{name}</div>
+    <AppProvider>
       <ChildrenOne />
-    </>
+      <ChildrenTwo />
+    </AppProvider>
   )
 }
 
-function ChildrenOne() {
-  return <ChildrenOne />
-}
 
-function ChildrenTwo() {
-  return (
-    <button onClick={() => setName('Carlinhos da Massa')}>Mude o nome</button>
-  )
-}
+
+
 
 export default App
